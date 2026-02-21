@@ -26,8 +26,6 @@ DROP TABLE IF EXISTS `tyonhaunseuranta`.`yritys` ;
 CREATE TABLE IF NOT EXISTS `tyonhaunseuranta`.`yritys` (
   `yritysID` INT NOT NULL AUTO_INCREMENT,
   `nimi` VARCHAR(45) NOT NULL,
-  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`yritysID`),
   UNIQUE INDEX `nimi` (`nimi` ASC) VISIBLE)
 ENGINE = InnoDB
@@ -45,8 +43,6 @@ CREATE TABLE IF NOT EXISTS `tyonhaunseuranta`.`tyoilmoitus` (
   `otsikko` VARCHAR(45) NOT NULL,
   `kuvaus` TEXT NOT NULL,
   `yritysID` INT NOT NULL,
-  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`tyoilmoitusID`),
   INDEX `fk_tyoilmoitus_yritys_idx` (`yritysID` ASC) VISIBLE,
   CONSTRAINT `fk_tyoilmoitus_yritys`
@@ -67,8 +63,6 @@ CREATE TABLE IF NOT EXISTS `tyonhaunseuranta`.`tyonhakija` (
   `nimi` VARCHAR(45) NOT NULL,
   `syntymaaika` DATE NOT NULL,
   `osoite` VARCHAR(45) NOT NULL,
-  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`tyonhakijaID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
@@ -86,8 +80,6 @@ CREATE TABLE IF NOT EXISTS `tyonhaunseuranta`.`tyohakemus` (
   `tila` ENUM('Avoin', 'Haastattelu', 'Hylätty', 'Hyväksytty') NOT NULL,
   `tyonhakijaID` INT NOT NULL,
   `tyoilmoitusID` INT NOT NULL,
-  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`tyohakemusID`),
   INDEX `fk_tyohakemus_tyonhakija1_idx` (`tyonhakijaID` ASC) VISIBLE,
   INDEX `fk_tyohakemus_tyoilmoitus1_idx` (`tyoilmoitusID` ASC) VISIBLE,
@@ -113,8 +105,6 @@ CREATE TABLE IF NOT EXISTS `tyonhaunseuranta`.`haastattelu` (
   `tyyppi` ENUM('Puhelin', 'Teams', 'Yksilöhaastattelu', 'Ryhmähaastattelu') NULL DEFAULT NULL,
   `tila` ENUM('Tulossa', 'Pidetty', 'Peruttu', 'Hylätty', 'Hyväksytty') NOT NULL,
   `tyohakemusID` INT NOT NULL,
-  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`haastatteluID`),
   INDEX `fk_haastattelu_tyohakemus1_idx` (`tyohakemusID` ASC) VISIBLE,
   CONSTRAINT `fk_haastattelu_tyohakemus1`
